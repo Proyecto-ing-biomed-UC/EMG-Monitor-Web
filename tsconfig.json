@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",  // Asegura que la base esté en la raíz
+    "paths": {
+      "@/components/*": ["./components/*"],  // Ajusta para que apunte a la carpeta correcta
+      "@/lib/*": ["./lib/*"]  // Si tienes otras carpetas como lib
+    },
+    "jsx": "react",  // Si estás usando React
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["./**/*.tsx", "./**/*.ts"],  // Asegúrate de incluir todos los archivos de tu proyecto
+  "exclude": ["node_modules"]  // Excluye node_modules
+}
+
