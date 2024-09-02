@@ -3,12 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LockIcon, UserIcon } from 'lucide-react';
-
+import axios from 'axios';
+import { useAuth } from './context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 export default function Component() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [textIndex, setTextIndex] = useState(0); // Estado para manejar el texto animado
+  const navigate = useNavigate(); // Hook para redirigir
 
+  const { login } = useAuth(); // Usa el contexto de autenticación
   // Lista de textos a mostrar
   const texts = [
     "FUTURO",
@@ -26,9 +30,33 @@ export default function Component() {
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, [texts.length]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Iniciar sesión con:', username, password);
+
+    try {
+      // Realizar solicitud POST a la API de NestJS
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        username,
+        password,
+      });
+
+      console.log('Respuesta de la API:', response.data);
+      // Maneja la respuesta de la API (guardar token, redirigir, etc.)
+      if (response.data.access_token) {
+        // Guarda el token en localStorage o en cookies
+        localStorage.setItem('access_token', response.data.access_token);
+        
+        // Actualiza el estado de autenticación usando el contexto
+        login(); // Llama a la función login del contexto
+
+        // Redirige al Dashboard
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      // Maneja errores (mostrar mensajes, etc.)
+    }
   };
 
   return (
