@@ -9,7 +9,7 @@ import { useAuth } from '../context/AuthContext'; // Importa el hook de autentic
 import CiervoLogin from '../CiervoLogin';
 import About from '../pages/About';
 import DataCapture from '../components/DataCapture';
-
+import FakeDataGenerator from '../components/FakeDataGenerator';
 const AppRoutes: React.FC = () => {
   const { isAuthenticated } = useAuth(); // Verifica si el usuario está autenticado
 
@@ -27,7 +27,12 @@ const AppRoutes: React.FC = () => {
           </PrivateRoute>
         }
       />
-      <Route path="/data-capture" element={<DataCapture />} />
+      <Route path="/data-capture" element={
+        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <DataCapture />
+        </PrivateRoute>
+        } />
+      <Route path="/fake-data" element={<FakeDataGenerator />} />
       {/* Ruta para manejar páginas no encontradas */}
       <Route path="*" element={<NotFound />} />
     </Routes>
