@@ -11,9 +11,10 @@ interface RandomData {
   channel_6: number;
   channel_7: number;
   channel_8: number;
-  channel_9: number;  // Giroscopio X
-  channel_10: number; // Giroscopio Y
-  channel_11: number; // Giroscopio Z
+  channel_9: number;  // Goniometro
+  channel_10: number;  // Giroscopio X
+  channel_11: number; // Giroscopio Y
+  channel_12: number; // Giroscopio Z
   time: number;       // Tiempo
 }
 
@@ -32,9 +33,10 @@ const FakeDataGenerator: React.FC = () => {
         channel_6: Math.random() * 100,
         channel_7: Math.random() * 100,
         channel_8: Math.random() * 100,
-        channel_9: Math.random() * 100,   // Giroscopio X
-        channel_10: Math.random() * 100,  // Giroscopio Y
-        channel_11: Math.random() * 100,  // Giroscopio Z
+        channel_9: Math.random() * 100,   
+        channel_10: Math.random() * 100,  // Giroscopio X
+        channel_11: Math.random() * 100,  // Giroscopio Y
+        channel_12: Math.random() * 100,  // Giroscopio Z
         time: Date.now(),                 // Tiempo actual en milisegundos
       };
 

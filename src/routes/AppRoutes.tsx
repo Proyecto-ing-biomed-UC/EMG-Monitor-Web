@@ -28,9 +28,7 @@ const AppRoutes: React.FC = () => {
         }
       />
       <Route path="/data-capture" element={
-        <PrivateRoute isAuthenticated={isAuthenticated}>
         <DataCapture />
-        </PrivateRoute>
         } />
       <Route path="/fake-data" element={<FakeDataGenerator />} />
       {/* Ruta para manejar páginas no encontradas */}
