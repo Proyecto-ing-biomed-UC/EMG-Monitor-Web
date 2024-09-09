@@ -11,7 +11,7 @@ const useMQTT = () => {
   const [buffer, setBuffer] = useState<MQTTData[]>([]); // Buffer para almacenar los datos entrantes
 
   useEffect(() => {
-    const brokerHost = import.meta.env.VITE_BROKER_HOST || 'ws://100.90.57.1:8083';
+    const brokerHost = import.meta.env.VITE_BROKER_HOST || 'ws://100.90.57.1:8083/mqtt';
     const brokerTopic = import.meta.env.VITE_MQTT_TOPIC || 'data';
 
     const client: MqttClient = mqtt.connect(brokerHost);
