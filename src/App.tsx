@@ -10,9 +10,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        {/* <NavBar /> */}
-        {/* <AppRoutes /> */}
-        <MqttSuscriber />
+        <NavBar />
+        <AppRoutes />
+        
       </Router>
     </AuthProvider>
   );
