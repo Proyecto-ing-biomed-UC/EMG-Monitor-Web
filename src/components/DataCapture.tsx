@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import useMQTT from '../hooks/useMQTT';
+import MQTTSuscriber from '../hooks/MQTTSuscriber';
 import RecordingIndicator from './RecordingIndicator';
 import ConnectionIndicator from './ConnectionIndicator';
 import ChannelControls from './ChannelControls';

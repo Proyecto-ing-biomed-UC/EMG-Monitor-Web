@@ -11,7 +11,7 @@ function App() {
     <AuthProvider>
       <Router>
         {/* <NavBar /> */}
-        {/* <AppRoutes /> Usa el componente de rutas aquí */}
+        {/* <AppRoutes /> */}
         <MqttSuscriber />
       </Router>
     </AuthProvider>
