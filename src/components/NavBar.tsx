@@ -28,12 +28,12 @@ const Navbar: React.FC = () => {
         
         {/* Secciones del Menú */}
         <div className="flex items-center space-x-4">
-          <Link to="/" className="hover:text-teal-300 transition-colors duration-300">Home</Link>
-          <Link to="/data-capture" className="hover:text-teal-300 transition-colors duration-300">Data Capture</Link>
-          <Link to="/fake-data" className="hover:text-teal-300 transition-colors duration-300">Fake Data</Link>
-          <Link to="/dashboard" className="hover:text-teal-300 transition-colors duration-300">Dashboard</Link>
-          <Link to="/about" className="hover:text-teal-300 transition-colors duration-300">About</Link>
-          <Link to="/contact" className="hover:text-teal-300 transition-colors duration-300">Contact</Link>
+          <Link to="/" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">Home</Link>
+          <Link to="/data-capture" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">Data Capture</Link>
+          <Link to="/fake-data" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">Fake Data</Link>
+          <Link to="/dashboard" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">Dashboard</Link>
+          <Link to="/about" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">About</Link>
+          <Link to="/contact" className="font-bold text-teal-400 hover:text-teal-300 transition-colors duration-300">Contact</Link>
         </div>
 
         {/* Botón de Iniciar/Cerrar Sesión */}
