@@ -17,6 +17,8 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
   const [data, setData] = useState<any[]>([]); // Estado para datos de visualización
   const [isRecording, setIsRecording] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null); // Estado para almacenar el tiempo de inicio
+  const [isLoading, setIsLoading] = useState(false);
+  const [isContainersLoaded, setIsContainersLoaded] = useState(false);
   const [selectedChannels, setSelectedChannels] = useState({
     channel_1: true,
     channel_2: true,
@@ -82,6 +84,26 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
     }));
   };
 
+  const handleStartContainers = async () => {
+    setIsLoading(true);
+    setIsContainersLoaded(false);
+    try {
+      const response = await fetch('http://localhost:3000/docker/activar-contenedores', {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        setIsContainersLoaded(true);
+      } else {
+        console.error('Error al iniciar los contenedores');
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-green-500 to-teal-600 p-6 mt-16">
       <div className="container mx-auto p-6 bg-zinc-800/90 rounded-lg shadow-xl backdrop-blur-sm w-full max-w-7xl">
@@ -91,6 +113,18 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
         <div className="flex flex-wrap items-center mb-6 space-y-4 lg:space-y-0 lg:space-x-6">
           <RecordingIndicator isRecording={isRecording} />
           <ConnectionIndicator isConnected={isConnected} />
+        
+        <div
+            className={`w-4 h-4 rounded-full ${
+              isLoading ? 'bg-yellow-500' : isContainersLoaded ? 'bg-green-500' : 'bg-gray-500'
+            }`}
+          />
+        </div>
+        {/* Controles de Activación de Contenedores */}
+        <div className="flex flex-wrap space-x-4 mb-6">
+          <Button onClick={handleStartContainers} className="bg-blue-500 hover:bg-blue-600 text-white">
+            Activar Contenedores Docker
+          </Button>
         </div>
 
         {/* Controles de Captura de Datos */}
