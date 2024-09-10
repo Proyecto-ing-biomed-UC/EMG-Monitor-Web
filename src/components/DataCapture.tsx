@@ -103,6 +103,23 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
       setIsLoading(false);
     }
   };
+  const handleGuardarDatos = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/data/guardar-datos', { method: 'POST' });
+      if (response.ok) {
+        alert('Datos guardados correctamente en CSV.');
+      } else {
+        alert('Error al guardar los datos.');
+      }
+    } catch (error) {
+      console.error('Error al guardar datos:', error);
+      alert('Error al guardar datos.');
+    }
+  };
+
+  const handleDescargarCSV = () => {
+    window.location.href = 'http://localhost:3000/data/descargar-datos';
+  };
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-green-500 to-teal-600 p-6 mt-16">
@@ -132,7 +149,19 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
           <Button onClick={handleStartCapture} className="bg-teal-500 hover:bg-teal-600 text-white">Iniciar Toma de Datos</Button>
           <Button onClick={handleStopCapture} className="bg-red-500 hover:bg-red-600 text-white">Pausar Grabación</Button>
         </div>
-
+        <div>
+          <Button onClick={handleGuardarDatos}>Guardar Datos en CSV</Button>
+          
+          {/* Enlace para descargar el CSV en una nueva pestaña */}
+          <a
+            href="http://localhost:3000/data/descargar-datos"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="output.csv"
+          >
+            <Button>Descargar CSV</Button>
+          </a>
+        </div>
         {/* Controles de Canales */}
         <ChannelControls
           selectedChannels={selectedChannels}
