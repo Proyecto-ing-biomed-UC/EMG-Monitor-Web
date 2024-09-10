@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import useMQTT from '../hooks/useMQTT';
+import MQTTSuscriber from '../hooks/MQTTSuscriber';
 import RecordingIndicator from './RecordingIndicator';
 import ConnectionIndicator from './ConnectionIndicator';
 import ChannelControls from './ChannelControls';
@@ -21,14 +22,14 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
     channel_2: true,
     channel_3: true,
     channel_4: true,
-    channel_5: true,
-    channel_6: true,
-    channel_7: true,
-    channel_8: true,
-    channel_9: true,
-    channel_10: true,
-    channel_11: true,
-    channel_12: true,
+    channel_5: false,
+    channel_6: false,
+    channel_7: false,
+    channel_8: false,
+    channel_9: false,
+    channel_10: false,
+    channel_11: false,
+    channel_12: false,
   });
 
   const [channelNames, setChannelNames] = useState({
