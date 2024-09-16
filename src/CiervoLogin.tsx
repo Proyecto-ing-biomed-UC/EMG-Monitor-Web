@@ -36,7 +36,7 @@ export default function Component() {
 
     try {
       // Realizar solicitud POST a la API de NestJS
-      const response = await axios.post('http://localhost:3000/auth/login', {
+      const response = await axios.post(`${import.meta.env.VITE_HOST}/auth/login`, {
         username,
         password,
       });

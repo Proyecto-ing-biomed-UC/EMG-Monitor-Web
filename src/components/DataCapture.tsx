@@ -88,7 +88,7 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
     setIsLoading(true);
     setIsContainersLoaded(false);
     try {
-      const response = await fetch('http://localhost:3000/docker/activar-contenedores', {
+      const response = await fetch(`http://100.90.57.1:3000/docker/activar-contenedores`, {
         method: 'POST',
       });
 
@@ -103,9 +103,31 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
       setIsLoading(false);
     }
   };
+
+  const handleStopContainers = async () => {
+    setIsLoading(false);
+    setIsContainersLoaded(true);
+    try {
+      const response = await fetch(`http://100.90.57.1:3000/docker/detener-contenedores`, {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        setIsContainersLoaded(false);
+      } else {
+        console.error('Error al detener los contenedores');
+      }
+    }
+    catch (error) {
+      console.error('Error de red:', error);
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }
   const handleGuardarDatos = async () => {
     try {
-      const response = await fetch('http://localhost:3000/data/guardar-datos', { method: 'POST' });
+      const response = await fetch(`${import.meta.env.VITE_HOST}/data/guardar-datos`, { method: 'POST' });
       if (response.ok) {
         alert('Datos guardados correctamente en CSV.');
       } else {
@@ -118,7 +140,7 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
   };
 
   const handleDescargarCSV = () => {
-    window.location.href = 'http://localhost:3000/data/descargar-datos';
+    window.location.href = `${import.meta.env.VITE_HOST}/data/descargar-datos`;
   };
 
   return (
@@ -144,6 +166,12 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
           </Button>
         </div>
 
+        <div className="flex flex-wrap space-x-4 mb-6">
+          <Button onClick={handleStopContainers} className="bg-red-500 hover:bg-red-600 text-white">
+            Detener Contenedores Docker
+          </Button>
+        </div>
+
         {/* Controles de Captura de Datos */}
         <div className="flex flex-wrap space-x-4 mb-6">
           <Button onClick={handleStartCapture} className="bg-teal-500 hover:bg-teal-600 text-white">Iniciar Toma de Datos</Button>
@@ -154,7 +182,7 @@ const DataCapture: React.FC<DataCaptureProps> = ({ simulatedData }) => {
           
           {/* Enlace para descargar el CSV en una nueva pestaña */}
           <a
-            href="http://localhost:3000/data/descargar-datos"
+            href="http://100.90.57.1/data/descargar-datos"
             target="_blank"
             rel="noopener noreferrer"
             download="output.csv"
